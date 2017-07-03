@@ -87,12 +87,18 @@ e.preventDefault(e);
 }else{
 $("#subnet_2").val(sub_net2);
 }
+
 if(!$.isNumeric(cidr))
 {
 $("#cidr").val('');
 $("#cidr").focus();
 alert("Enter Number Only!");
 e.preventDefault(e);
+}else if($("#cidr").val()===""){
+    
+alert("Enter CIDR!");
+e.preventDefault(e);
+
 }else{
 $("#cidr").val(cidr);
 }
