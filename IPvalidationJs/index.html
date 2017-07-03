@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>jQuery IPInput Plugin Example</title>
+
+<link href="jquery.ipinput.css" rel="stylesheet" type="text/css">
+<style>
+h1 { margin:150px auto 30px auto;}
+</style>
+</head>
+
+<body>
+
+<form method="POST" action="proc.php" id="subnet_form">
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<h2>IPv4 Address:</h2>
+<div id="demo" data-ip='127.0.0.1' data-name="IPAddr"></div><br />
+<h2>Subnet</2><br />
+<input type="text" id="subnet_1" name="subnet_1" readonly size="9" class="ipinput" />
+
+<input type="text" id="subnet_2" name="subnet_2" size="3" class="ipinput" required /><label >  /  <label>
+<input type="text" id="cidr" name="cidr" size="2" class="ipinput" placeholder="CIDR" required />
+<br />
+<input type="submit" value="submit" />
+</form>
+
+
+<!--<script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>-->
+<script src="jquery-1.12.2.js"></script>
+<script src="jquery.ipinput.js"></script>
+<script>
+
+
+//DONT TOUCH ANY SCRIPT OVER HERE!
+//===================================
+$('#demo').ipinput();
+$('#subnet_2').click(function(){
+    //Some code
+
+
+//value1 = $("#demo").html(); 
+value = $("#IPAddr").val(); 
+//value3 = $("#abc").val(); 
+//value4 = $("#abc").val(); 
+//alert(value1+'.'+value2+'.'+value3+'.'+value4);
+var va=value.split(".");
+//alert(value);
+//alert(value);
+
+va1=parseInt(va[0]);
+va2=parseInt(va[1]);
+va3=parseInt(va[2]);
+va4=parseInt(va[3]);
+var subnet_p1=va1+'.'+va2+'.'+va3+'.';
+
+
+if((!$.isNumeric(va1))||(!$.isNumeric(va2))||(!$.isNumeric(va3))||(!$.isNumeric(va4))){
+$(".num").val('255');
+$("#subnet_1").val('');
+$("#IPAddr").focus();
+alert("Enter Number Only!");
+
+
+}else{
+
+$("#ip_s0").val(va1);
+$("#ip_s1").val(va2);
+$("#ip_s2").val(va3);
+$("#ip_s3").val(va4);
+
+$("#subnet_1").val(subnet_p1);
+}
+});
+
+$('#subnet_form').submit(function(e){
+sub_net2=$("#subnet_2").val(); 
+cidr=$("#cidr").val(); 
+
+sub_net2=parseInt(sub_net2);
+cidr=parseInt(cidr);
+if(!$.isNumeric(sub_net2)){
+$("#subnet_2").val('');
+$("#subnet_2").focus();
+alert("Enter Number Only!");
+e.preventDefault(e);
+}else{
+
+$("#subnet_2").val(sub_net2);
+
+}
+if(!$.isNumeric(cidr))
+{
+$("#cidr").val('');
+$("#cidr").focus();
+alert("Enter Number Only!");
+e.preventDefault(e);
+}else{
+$("#cidr").val(cidr);
+}
+
+
+});
+
+
+//===========================================================================================
+</script>
+
+</body>
+</html>
