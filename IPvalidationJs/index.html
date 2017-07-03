@@ -42,8 +42,6 @@ h1 { margin:150px auto 30px auto;}
 $('#demo').ipinput();
 $('#subnet_2').click(function(){
     //Some code
-
-
 //value1 = $("#demo").html(); 
 value = $("#IPAddr").val(); 
 //value3 = $("#abc").val(); 
@@ -52,36 +50,32 @@ value = $("#IPAddr").val();
 var va=value.split(".");
 //alert(value);
 //alert(value);
-
 va1=parseInt(va[0]);
 va2=parseInt(va[1]);
 va3=parseInt(va[2]);
 va4=parseInt(va[3]);
 var subnet_p1=va1+'.'+va2+'.'+va3+'.';
-
-
 if((!$.isNumeric(va1))||(!$.isNumeric(va2))||(!$.isNumeric(va3))||(!$.isNumeric(va4))){
-$(".num").val('255');
+$(".num").val('254');
 $("#subnet_1").val('');
 $("#IPAddr").focus();
 alert("Enter Number Only!");
+}else if(va1===0 || va1===127){
+alert("Enter Valid IP except 0 and 127");
 
-
-}else{
-
+$(".num").val('10');
+    }else{
+ 
 $("#ip_s0").val(va1);
 $("#ip_s1").val(va2);
 $("#ip_s2").val(va3);
 $("#ip_s3").val(va4);
-
 $("#subnet_1").val(subnet_p1);
 }
 });
-
-$('#subnet_form').submit(function(e){
+$('#IPcheck').submit(function(e){
 sub_net2=$("#subnet_2").val(); 
 cidr=$("#cidr").val(); 
-
 sub_net2=parseInt(sub_net2);
 cidr=parseInt(cidr);
 if(!$.isNumeric(sub_net2)){
@@ -90,9 +84,7 @@ $("#subnet_2").focus();
 alert("Enter Number Only!");
 e.preventDefault(e);
 }else{
-
 $("#subnet_2").val(sub_net2);
-
 }
 if(!$.isNumeric(cidr))
 {
@@ -103,12 +95,9 @@ e.preventDefault(e);
 }else{
 $("#cidr").val(cidr);
 }
-
-
 });
-
-
 //===========================================================================================
+
 </script>
 
 </body>
