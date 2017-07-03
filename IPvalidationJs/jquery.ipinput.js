@@ -21,7 +21,7 @@
 
             inp.keyup(function () {
               if (this.value.length == this.maxLength) {
-                if(parseInt(this.value)>255)
+                if(parseInt(this.value)>254 || parseInt(this.value)==0)
                 {
                   var t = $(this);
                   t.closest('div').addClass('highlighted');
@@ -35,7 +35,8 @@
               var ip = "";
               for(var i = 0; i < 4; i++)
               {
-                ip += div.children('input').eq(i).val();
+                ip += parseInt(div.children('input').eq(i).val());
+		//ip=parseInt(ip);
                 if(i<3)
                   ip +=('.');
               }
@@ -43,11 +44,12 @@
             });
           }
           this.append($('<input type="hidden" id="' + this.data('name') + '" name="' + this.data('name') + '" value="">'));
+		
           this.ipinput('setaddress', this.data('ip'));
           return this;
       },
       setaddress : function(ip) {
-        var s = ip.split('.');
+	var s = ip.split('.');
         for(var i = 0; i < 4; i++)
         {
           this.children('input').eq(i).val(s[i]);
