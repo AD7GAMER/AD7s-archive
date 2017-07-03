@@ -60,8 +60,8 @@ $(".num").val('254');
 $("#subnet_1").val('');
 $("#IPAddr").focus();
 alert("Enter Number Only!");
-}else if(va1<2 || va1===127){
-alert("Enter Valid IP except 0, 1 and 127");
+}else if(va1<2 || ((subnet_p1==="127.0.0.") && (va4<256 && va4>=0))){
+alert("Enter Valid IP except 0.0.0.0, 1.*.*.* and 127.0.0.*");
 
 $(".num").val('10');
 $("#subnet_1").val('');
